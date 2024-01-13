@@ -15,7 +15,6 @@ export function setLocalStorage(key, data) {
   let existingData = getLocalStorage(key) || [];
   //append the new data to the existingData
   existingData.push(data);
-  console.table(existingData);
   //save to localStorage
   localStorage.setItem(key, JSON.stringify(existingData));
 }
