@@ -1,4 +1,5 @@
-//contain code to dynamically product the product detail pages
+//contain code to dynamically produce the product detail pages
+//also contains the addToCart method
 import { setLocalStorage} from './utils.mjs';
 
 function productDetailsTemplate(product) {

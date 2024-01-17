@@ -1,3 +1,4 @@
+//Grabs the Product Info from json
 function convertToJson(res) {
   if (res.ok) {
     return res.json();
