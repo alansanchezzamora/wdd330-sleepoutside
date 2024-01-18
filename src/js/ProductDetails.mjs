@@ -1,7 +1,10 @@
-//contain code to dynamically produce the product detail pages
+//Feeds into product.js which feeds the product_pages/index.html
+//contain code to dynamically produce the product details
 //also contains the addToCart method
 import { setLocalStorage} from './utils.mjs';
 
+
+//template literal to populate the detail information for the given product
 function productDetailsTemplate(product) {
     return `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
       <h2 class="divider">${product.NameWithoutBrand}</h2>
@@ -20,8 +23,9 @@ function productDetailsTemplate(product) {
       </div></section>`;
 }
 
-
-
+//ProductDetail class.  Data is dynamically pulled from json file based on id
+//dataSource input determine the path to the json file.  So this decides what category (tent vs backpack, etc)
+//initialization actually grabs the data for the id, then calls the renderProductDetails and contains the event listener for the addToCart
 export default class ProductDetail {
     constructor(productId, dataSource){
         this.productId = productId;
@@ -38,10 +42,12 @@ export default class ProductDetail {
         document.getElementById('addToCart')
           .addEventListener('click', this.addToCart.bind(this));
     }
+    //simply adds the product info to the local storage.
     addToCart(){
-
             setLocalStorage('so-cart', this.product);
     }
+    //populates the details on the product page using the template
+    //selector determines what element to attach the details to
     renderProductDetails(selector){
         //method to generate HTML to display our product
         const element = document.querySelector(selector);

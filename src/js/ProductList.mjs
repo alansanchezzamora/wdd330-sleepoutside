@@ -6,6 +6,7 @@
 
 import { renderListWithTemplate } from "./utils.mjs";
 
+//Template literal for product cards on main page
 function productCardTemplate(product){
     return `<li class="product-card">
     <a href="product_pages/index.html?product=${product.Id}">
@@ -18,6 +19,10 @@ function productCardTemplate(product){
 }
 
 
+//Product List class used on main page to list out products from json, 
+//calls renderList to actually display the info from the ProductList class using the template
+//filter is used to manually filter out broken products in the json file.  
+//TODO - I'd like to move the filter IDs into a JSON and pull from that dynamically.  So an admin could just keep the filter.json file updated on what products they don't want displayed.  
 export default class ProductList{
     constructor(category, dataSource, listElement){
         this.category = category;
@@ -28,13 +33,11 @@ export default class ProductList{
         const productList = await this.dataSource.getData();
         this.renderList(productList)
     }
-    
     renderList(productList){
         //filter out bad products before sending to render
         this.filter(productList);
         renderListWithTemplate(productCardTemplate, this.listElement, productList, 'afterbegin', false);
     }
-
     filter(productList){
         //filtering out by hardcoded id.  feels brute force but not seeing another way to filter?
         const idFilters = ["880RT", "989CG"];
