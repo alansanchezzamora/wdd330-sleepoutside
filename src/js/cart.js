@@ -1,6 +1,6 @@
 //used to populate cart/index.html data
 
-import { getLocalStorage } from './utils.mjs';
+import { getLocalStorage, renderCartCount } from './utils.mjs';
 
 //gets local storage, maps it to the template then populates the htm using the template literal
 function renderCartContents() {
@@ -30,5 +30,7 @@ function cartItemTemplate(item) {
 
   return newItem;
 }
-
+//populate the cart info on cart page
 renderCartContents();
+//gets the Cart Count for the backpack superscript
+renderCartCount();

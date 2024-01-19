@@ -103,6 +103,34 @@ button {
   text-align: center;
 }
 
+/* Cart counter styles */
+.visible {
+  display: flex;
+  visibility: visible;
+}
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+#cart-count {
+  position: absolute;
+  top: 10%;
+  right: 0%;
+  background-color: #e5aa72;
+  color: #4e2286;
+  font-size: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6em;
+  /* making w/h smaller than the numbers so the padding controls the size */
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
 .cart svg {
   width: 25px;
 }
