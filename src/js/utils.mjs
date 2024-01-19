@@ -67,7 +67,6 @@ export function renderCartCount(){
   else{
     hideCartCounter(cartCounter);
   }
-  console.log(cartCount)
   cartCounter.innerText = cartCount;
 
 }
