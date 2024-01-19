@@ -1,7 +1,7 @@
 //Feeds into product.js which feeds the product_pages/index.html
 //contain code to dynamically produce the product details
 //also contains the addToCart method
-import { setLocalStorage} from './utils.mjs';
+import {setLocalStorage, renderCartCount} from './utils.mjs';
 
 
 //template literal to populate the detail information for the given product
@@ -45,6 +45,8 @@ export default class ProductDetail {
     //simply adds the product info to the local storage.
     addToCart(){
             setLocalStorage('so-cart', this.product);
+            //added here to update cart counter each time you add an item
+            renderCartCount();
     }
     //populates the details on the product page using the template
     //selector determines what element to attach the details to

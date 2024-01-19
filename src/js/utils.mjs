@@ -44,3 +44,49 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
 }
+
+
+
+/* 
+   _____          _____ _______    _____ ____  _    _ _   _ _______ ______ _____  
+  / ____|   /\   |  __ \__   __|  / ____/ __ \| |  | | \ | |__   __|  ____|  __ \ 
+ | |       /  \  | |__) | | |    | |   | |  | | |  | |  \| |  | |  | |__  | |__) |
+ | |      / /\ \ |  _  /  | |    | |   | |  | | |  | | . ` |  | |  |  __| |  _  / 
+ | |____ / ____ \| | \ \  | |    | |___| |__| | |__| | |\  |  | |  | |____| | \ \ 
+  \_____/_/    \_\_|  \_\ |_|     \_____\____/ \____/|_| \_|  |_|  |______|_|  \_\
+*/
+
+//cart superscript
+export function renderCartCount(){
+  const cartCounter = document.getElementById('cart-count');
+  const cartCount = getCartCount();
+
+  if (cartCount>0){
+    showCartCounter(cartCounter);
+  }
+  else{
+    hideCartCounter(cartCounter);
+  }
+  console.log(cartCount)
+  cartCounter.innerText = cartCount;
+
+}
+//Toggle visibility of the cart depending on if something is in it
+//default is hidden
+function showCartCounter(element){
+  element.classList.add('visible');
+  element.classList.remove('hidden');
+}
+function hideCartCounter(element){
+  element.classList.add('hidden');
+  element.classList.remove('visible');
+}
+function getCartCount() {
+  const cart = getLocalStorage('so-cart');
+  let cartCount = 0;
+  if (cart !== null && cart !== undefined) {
+    cartCount = cart.length;
+  }
+  return cartCount;
+}
+//#################################################################################
