@@ -5,8 +5,10 @@ import { getLocalStorage } from './utils.mjs';
 //gets local storage, maps it to the template then populates the htm using the template literal
 function renderCartContents() {
   const cartItems = getLocalStorage('so-cart');
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector('.product-list').innerHTML = htmlItems.join('');
+  if (cartItems != null) {
+    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+    document.querySelector('.product-list').innerHTML = htmlItems.join('');
+  }
 }
 
 //template literal
