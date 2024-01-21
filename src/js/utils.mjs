@@ -89,3 +89,7 @@ function getCartCount() {
   return cartCount;
 }
 //#################################################################################
+
+
+// Delete the item of a car
+
