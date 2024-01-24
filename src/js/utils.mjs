@@ -46,6 +46,35 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
 }
 
 
+//Week3
+export function renderWithTemplate(templateFn, parentElement, data, callback, position = "afterbegin"){
+  //No idea what this is for...
+  if(callback) {
+    callback(data)
+  }
+  //insert the template data at the beginning of the element.
+  parentElement.insertAdjacentHTML(position, templateFn);
+}
+
+export async function loadHeaderFooter(){
+  //grab header/footer elements
+  const header = document.getElementById('main-header');
+  const footer = document.getElementById('main-footer');
+  //grab the template data
+  const headerTemplate = await loadTemplate('../public/partials/header.html');
+  const footerTemplate = await loadTemplate('../public/partials/footer.html');
+  renderWithTemplate(headerTemplate, header);
+  renderWithTemplate(footerTemplate, footer);
+  //moved renderCartCount into here so it's loaded after the Header/Footer is created since that is an async function.
+  renderCartCount()
+}
+//fetch the template info
+//note this is generic so could be reused if needed.
+export async function loadTemplate(path) {
+  const response = await fetch(path);
+  const template = await response.text();
+  return template
+}
 
 /* 
    _____          _____ _______    _____ ____  _    _ _   _ _______ ______ _____  
@@ -55,20 +84,19 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
  | |____ / ____ \| | \ \  | |    | |___| |__| | |__| | |\  |  | |  | |____| | \ \ 
   \_____/_/    \_\_|  \_\ |_|     \_____\____/ \____/|_| \_|  |_|  |______|_|  \_\
 */
-
 //cart superscript
 export function renderCartCount(){
   const cartCounter = document.getElementById('cart-count');
   const cartCount = getCartCount();
-
+  //check if cart has items to toggle visibility
   if (cartCount>0){
     showCartCounter(cartCounter);
   }
   else{
     hideCartCounter(cartCounter);
   }
+  //populate the div w/ the count
   cartCounter.innerText = cartCount;
-
 }
 //Toggle visibility of the cart depending on if something is in it
 //default is hidden
@@ -89,7 +117,3 @@ function getCartCount() {
   return cartCount;
 }
 //#################################################################################
-
-
-// Delete the item of a car
-
