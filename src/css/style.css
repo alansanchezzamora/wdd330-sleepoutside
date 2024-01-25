@@ -206,14 +206,13 @@ button {
 .close-btn {
   position: absolute;
   right: 0;
-  top:0;
+  top: 0;
   padding: 2px;
   font-size: 10px;
   font-weight: bold;
   border: 1px solid black;
   background: black;
   color: white;
-  
 }
 .cart-card__image {
   grid-row: 1/3;
