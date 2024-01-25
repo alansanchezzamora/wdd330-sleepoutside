@@ -90,25 +90,25 @@ export function renderCartCount(){
   const cartCount = getCartCount();
   //check if cart has items to toggle visibility
   if (cartCount>0){
-    showCartCounter(cartCounter);
+    showElement(cartCounter);
   }
   else{
-    hideCartCounter(cartCounter);
+    hideElement(cartCounter);
   }
   //populate the div w/ the count
   cartCounter.innerText = cartCount;
 }
 //Toggle visibility of the cart depending on if something is in it
 //default is hidden
-function showCartCounter(element){
+export function showElement(element) {
   element.classList.add('visible');
   element.classList.remove('hidden');
 }
-function hideCartCounter(element){
+export function hideElement(element) {
   element.classList.add('hidden');
   element.classList.remove('visible');
 }
-function getCartCount() {
+export function getCartCount() {
   const cart = getLocalStorage('so-cart');
   let cartCount = 0;
   if (cart !== null && cart !== undefined) {
