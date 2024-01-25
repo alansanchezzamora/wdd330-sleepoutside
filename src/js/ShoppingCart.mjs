@@ -1,34 +1,62 @@
 //used to populate cart/index.html data
-import { getLocalStorage } from './utils.mjs';
-
+import {
+  getLocalStorage,
+  hideElement,
+  showElement,
+  getCartCount,
+} from './utils.mjs';
 
 //SHOPPING CART CLASS
-export default class ShoppingCart{
-    constructor(key, parentSelector){
-        this.key = key;
-        this.parentSelector = parentSelector;
+export default class ShoppingCart {
+  constructor(key, parentSelector) {
+    this.key = key;
+    this.parentSelector = parentSelector;
+  }
+  //RENDER CART CONTENTS
+  renderCartContents() {
+    const cartItems = getLocalStorage(this.key);
+    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+    document.querySelector(this.parentSelector).innerHTML = htmlItems.join('');
+  }
+  //DELETE CART ITEMS
+  removeItem(id) {
+    var cartItems = getLocalStorage('so-cart');
+    if (cartItems) {
+      //if carItems isn't empty
+      const itemIndex = cartItems.findIndex((item) => item.Id === id); //find the index with the first id
+      if (itemIndex !== -1) {
+        // if you find the item, delete it from the array
+        cartItems.splice(itemIndex, 1);
+        localStorage.clear(); //delete the previous so-cart in localStorage
+        localStorage.setItem('so-cart', JSON.stringify(cartItems)); //save the new object cart in localStorage and make it json object.
+      }
     }
-    //RENDER CART CONTENTS
-    renderCartContents(){
-        const cartItems = getLocalStorage(this.key);
-        const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-        document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
+    const itemToDelete = document.getElementById(id); //grab the element using the productId that's passed in
+    itemToDelete.remove(); //directly remove the element
+    this.calculateTotal();
+  }
+
+  //CALCULATE TOTAL
+  calculateTotal() {
+    var cartCount = getCartCount();
+    const element = document.getElementById('cart-footer');
+    const totalElement = document.getElementById('cart-total');
+    let finalPrice = 0;
+    if (cartCount > 0) {
+      showElement(element);
+      const cartItems = getLocalStorage(this.key);
+      for (let i = 0; i < cartItems.length; i++) {
+        let obj = cartItems[i];
+        finalPrice = obj.FinalPrice + finalPrice;
+      }
+      totalElement.innerText = `Total : $${finalPrice}`;
+    } else {
+      hideElement(element);
     }
-    //DELETE CART ITEMS
-    removeItem(id){
-        var cartItems = getLocalStorage('so-cart');
-        if (cartItems) {                                                          //if carItems isn't empty
-          const itemIndex = cartItems.findIndex(item => item.Id === id);          //find the index with the first id
-          if (itemIndex !== -1) {                                                 // if you find the item, delete it from the array
-            cartItems.splice(itemIndex, 1);
-            localStorage.clear();                                                 //delete the previous so-cart in localStorage 
-            localStorage.setItem('so-cart', JSON.stringify(cartItems))            //save the new object cart in localStorage and make it json object.
-          }
-        }
-        const itemToDelete = document.getElementById(id);                         //grab the element using the productId that's passed in
-        itemToDelete.remove();                                                    //directly remove the element
-    }
+    var cartItems = getLocalStorage('so-cart');
+  }
 }
+
 
 
 //CART ITEM TEMPLATE LITERAL

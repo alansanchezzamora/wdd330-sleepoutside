@@ -6,6 +6,7 @@ import ShoppingCart from './ShoppingCart.mjs';
 const cart = new ShoppingCart('so-cart', '.product-list'); //Create new instance of Shopping Cart
 cart.renderCartContents(); //pull cart contents from local storage
 loadHeaderFooter(); //load the header/footer templates
+cart.calculateTotal(); //
 //EVENT LISTENDER FOR CART DELETE BUTTONS
 const deleteButtons = document.querySelectorAll('.close-btn'); //Grab all class .close-btn
 deleteButtons.forEach((button) => {
