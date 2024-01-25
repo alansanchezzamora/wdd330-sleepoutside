@@ -147,14 +147,14 @@ button {
   max-width: 600px;
   margin: auto;
 }
-#categories{
+#categories {
   width: 100%;
   display: flex;
   justify-content: space-around;
   justify-content: center;
   padding: 0;
 }
-.categories-icon{
+.categories-icon {
   width: calc(15% - 10px);
   box-sizing: border-box;
   margin: 2%;

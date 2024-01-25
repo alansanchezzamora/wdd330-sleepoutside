@@ -9,8 +9,8 @@ import { renderListWithTemplate } from "./utils.mjs";
 //Template literal for product cards on main page
 function productCardTemplate(product){
     return `<li class="product-card">
-    <a href="product_pages/index.html?product=${product.Id}">
-      <img src="${product.Image}" alt="${product.Name} ">
+    <a href="../product_pages/index.html?product=${product.Id}">
+      <img src="${product.Images.PrimaryMedium}" alt="${product.Name} ">
       <h3 class="card__brand">${product.Brand.Name}</h3>
       <h2 class="card__name">${product.NameWithoutBrand}</h2>
       <p class="product-card__price">$${product.FinalPrice}</p>
@@ -25,12 +25,19 @@ function productCardTemplate(product){
 //TODO - I'd like to move the filter IDs into a JSON and pull from that dynamically.  So an admin could just keep the filter.json file updated on what products they don't want displayed.  
 export default class ProductList{
     constructor(category, dataSource, listElement){
+        //listElement is the name, don't sent the actual element.  This function grabs the element for us.  
+        console.log("before", listElement);
         this.category = category;
         this.dataSource = dataSource;
         this.listElement = document.querySelector(listElement);
+        console.log("after ", listElement)
     }
     async init(){
-        const productList = await this.dataSource.getData();
+        //wk3 change using API
+        //const productList = await this.dataSource.getData();
+        //this.renderList(productList)
+        const productList = await this.dataSource.getData(this.category);
+        console.table(productList)
         this.renderList(productList)
     }
     renderList(productList){
