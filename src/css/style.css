@@ -30,6 +30,25 @@ header {
   justify-content: space-between;
   padding: 0 10px;
 }
+.breadcrumb {
+  margin: 1rem;
+}
+.breadcrumb * {
+  display: inline;
+  list-style: none;
+  text-decoration: none;
+  padding: 0px;
+  font-family: var(--font-body);
+  color: var(--secondary-color);
+}
+.breadcrumb ul li + li:before {
+  content: '>';
+  padding: 10px;
+}
+.breadcrumb a:hover {
+  color: var(--primary-color);
+}
+
 .logo {
   line-height: 60px;
   width: 245px;
@@ -261,21 +280,27 @@ footer {
 }
 
 /* product grid styles */
+#categories {
+  display: flex;
+  justify-content: center;
+}
 .product-grid {
   list-style-type: none;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  align-content: center;
+  justify-content: space-between;
   text-align: center;
   color: var(--dark-grey);
-  padding-left: 0;
+  padding: 0;
+  width: clamp(400px, 100vw, 70%);
 }
 
 .product-grid > li {
   width: 150px;
   /* border: 1px solid var(--light-grey); */
   padding: 0.5em;
-  margin: 1em;
+  margin: 0;
 }
 .product-grid h2 {
   margin: 0;
@@ -284,11 +309,14 @@ footer {
 }
 .product-grid a {
   text-decoration: none;
+  width: calc(15% - 10px);
+  box-sizing: border-box;
 }
 .product-grid a:link,
 .product-grid a:visited {
   color: var(--dark-grey);
 }
-.product-grid a:hover {
-  text-decoration: underline;
+.product-grid img:hover {
+  transform: scale(1.08);
+  transition: 0.25s;
 }
