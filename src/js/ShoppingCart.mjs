@@ -37,7 +37,7 @@ function cartItemTemplate(item) {
   <button class='close-btn' data-id='${item.Id}'>X</button>
   <a href='#' class='cart-card__image'>
     <img
-      src='${item.Image}'
+      src='${item.Image.PrimaryMedium}'
       alt='${item.Name}'
     />
   </a>
