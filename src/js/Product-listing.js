@@ -21,4 +21,4 @@ myList.init();
 const categoryElement = document.getElementById('category-name');
 categoryElement.innerHTML = capitalizeWord(category);
 //also add it to localstorage so it can be used when item is selected.  can't see another way to pull category across to the details page
-localStorage.setItem('category',category);
+localStorage.setItem('category', category);
