@@ -18,6 +18,7 @@ function convertToJson(res) {
 export default class ProductData {
   async getData(category) {
     const response = await fetch(baseURL + `products/search/${category}`);
+    //console.table(response);
     const data = await convertToJson(response);
     return data.Result;
   }
@@ -26,6 +27,5 @@ export default class ProductData {
     const data = await convertToJson(products);
     return data.Result;
   }
-  
 }
 

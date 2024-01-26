@@ -41,7 +41,7 @@ export default class ProductDetail {
         // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
         document.getElementById('addToCart')
           .addEventListener('click', this.addToCart.bind(this));
-        this.renderBreadCrumb();
+        this.renderBreadCrumb(this.product.Category);
     }
     //simply adds the product info to the local storage.
     addToCart(){
@@ -59,13 +59,9 @@ export default class ProductDetail {
             productDetailsTemplate(this.product)
         )
     } 
-    renderBreadCrumb(productList){
+    renderBreadCrumb(category){
       const breadcrumbElement = document.getElementById('breadcrumb-category');
-      console.log(breadcrumbElement)
-      const category = localStorage.getItem('category');
-      console.log(category);
       breadcrumbElement.innerHTML = `${capitalizeWord(category)}`;
       breadcrumbElement.setAttribute('href',`../product-listing/index.html?category=${category}`);
-    }
-      
+    }      
 }
