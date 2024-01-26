@@ -61,8 +61,8 @@ export async function loadHeaderFooter(){
   const header = document.getElementById('main-header');
   const footer = document.getElementById('main-footer');
   //grab the template data
-  const headerTemplate = await loadTemplate('../public/partials/header.html');
-  const footerTemplate = await loadTemplate('../public/partials/footer.html');
+  const headerTemplate = await loadTemplate('../partials/header.html');
+  const footerTemplate = await loadTemplate('../partials/footer.html');
   renderWithTemplate(headerTemplate, header);
   renderWithTemplate(footerTemplate, footer);
   //moved renderCartCount into here so it's loaded after the Header/Footer is created since that is an async function.
