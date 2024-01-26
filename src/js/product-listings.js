@@ -1,7 +1,7 @@
+//js for the product-listing html page
 import ProductData from './ProductData.mjs';
 import ProductList from './ProductList.mjs';
-//js for the main html page
-import { loadHeaderFooter, getParams } from './utils.mjs';
+import { loadHeaderFooter, getParams, capitalizeWord } from './utils.mjs';
 
 //load header/footer wk 3
 loadHeaderFooter();
@@ -16,3 +16,9 @@ const myList = new ProductList(category, dataSource, listElement);
 
 // finally call the init method to show our products
 myList.init();
+
+//add category name to Top Products on html page & breadcrumb
+const categoryElement = document.getElementById('category-name');
+categoryElement.innerHTML = capitalizeWord(category);
+//also add it to localstorage so it can be used when item is selected.  can't see another way to pull category across to the details page
+localStorage.setItem('category', category);

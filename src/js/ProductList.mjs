@@ -4,18 +4,18 @@
     //class to handle productListing info.
     //filter out bad id's for tents.  May need a diff way to filter later?
 
-import { renderListWithTemplate } from "./utils.mjs";
+import { renderListWithTemplate, capitalizeWord } from "./utils.mjs";
 
 //Template literal for product cards on main page
 function productCardTemplate(product){
     return `<li class="product-card">
-    <a href="../ product_pages/index.html?product=${product.Id}">
-      <img src="${product.Images.PrimaryMedium}" alt="${product.Name} ">
-      <h3 class="card__brand">${product.Brand.Name}</h3>
-      <h2 class="card__name">${product.NameWithoutBrand}</h2>
-      <p class="product-card__price">$${product.FinalPrice}</p>
+    <a href="../product_pages/index.html?product=${product.Id}">
+        <img src="${product.Images.PrimaryMedium}" alt="${product.Name} ">
+        <h3 class="card__brand">${product.Brand.Name}</h3>
+        <h2 class="card__name">${product.NameWithoutBrand}</h2>
+        <p class="product-card__price">$${product.FinalPrice}</p>
     </a>
-  </li>`
+    </li>`
 }
 
 
@@ -28,15 +28,30 @@ export default class ProductList{
         this.category = category;
         this.dataSource = dataSource;
         this.listElement = document.querySelector(".product-list");
+        this.productCount = 0;
     }
     async init(){
         const productList = await this.dataSource.getData(this.category);
         this.renderList(productList)
+        this.counter(productList)
+        this.renderBreadCrumb(productList)
     }
     renderList(productList){
         //filter out bad products before sending to render
         this.filter(productList);
         renderListWithTemplate(productCardTemplate, this.listElement, productList, 'afterbegin', false);
+    }
+    //passes the info into the html for breadcrumb
+    renderBreadCrumb(productList){
+        const breadcrumbCountElement = document.getElementById('breadcrumb-count');
+        //passing into breadcrumb
+        breadcrumbCountElement.innerHTML = `${capitalizeWord(this.category)}: ${this.productCount} Items`;
+    }
+    //counts number of items in the list for the breadcrum. 
+    counter(productList){
+        Object.keys(productList).forEach(key => {
+            this.productCount += 1;
+        });
     }
     filter(productList){
         //filtering out by hardcoded id.  feels brute force but not seeing another way to filter?
