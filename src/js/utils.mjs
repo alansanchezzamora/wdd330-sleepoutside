@@ -116,4 +116,12 @@ export function getCartCount() {
   }
   return cartCount;
 }
-//#################################################################################
+
+//remove dashes and capitalize a word used for category in a couple places
+export function capitalizeWord(word) {
+  word = word.replace(/-/g, ' ');
+  const words = word.split(' ');
+  const capitalizedWords = words.map(w => w.charAt(0).toUpperCase() + w.slice(1));
+  return capitalizedWords.join(' ');
+}
+

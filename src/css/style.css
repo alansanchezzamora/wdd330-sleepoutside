@@ -30,6 +30,25 @@ header {
   justify-content: space-between;
   padding: 0 10px;
 }
+.breadcrumb{
+  margin: 1rem;
+}
+.breadcrumb * {
+  /*background-color: pink;*/
+  display: inline;
+  list-style: none;
+  text-decoration: none;
+  padding: 0px;
+  font-family: var(--font-body);
+  color: var(--secondary-color)
+}
+.breadcrumb ul li+li:before{
+  content: ">";
+  padding: 10px;
+}
+.breadcrumb a:hover{
+  color: var(--primary-color)
+}
 .logo {
   line-height: 60px;
   width: 245px;

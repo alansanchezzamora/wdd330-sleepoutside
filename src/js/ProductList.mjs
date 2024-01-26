@@ -4,7 +4,7 @@
     //class to handle productListing info.
     //filter out bad id's for tents.  May need a diff way to filter later?
 
-import { renderListWithTemplate } from "./utils.mjs";
+import { renderListWithTemplate, capitalizeWord } from "./utils.mjs";
 
 //Template literal for product cards on main page
 function productCardTemplate(product){
@@ -26,24 +26,36 @@ function productCardTemplate(product){
 export default class ProductList{
     constructor(category, dataSource, listElement){
         //listElement is the name, don't sent the actual element.  This function grabs the element for us.  
-        console.log("before", listElement);
         this.category = category;
         this.dataSource = dataSource;
         this.listElement = document.querySelector(listElement);
-        console.log("after ", listElement)
+        this.productCount = 0;
     }
     async init(){
         //wk3 change using API
         //const productList = await this.dataSource.getData();
         //this.renderList(productList)
         const productList = await this.dataSource.getData(this.category);
-        console.table(productList)
         this.renderList(productList)
+        this.counter(productList)
+        this.renderBreadcrumb(productList);
     }
     renderList(productList){
         //filter out bad products before sending to render
         this.filter(productList);
         renderListWithTemplate(productCardTemplate, this.listElement, productList, 'afterbegin', false);
+    }
+    renderBreadcrumb(productList){
+        //const breadcrumbElement = document.getElementById('breadcrumb-pl');
+        const breadcrumbCountElement = document.getElementById('breadcrumb-count');
+        //passing into breadcrumb
+        //breadcrumbElement.innerHTML = (capitalizeWord(this.category));
+        breadcrumbCountElement.innerHTML = `${capitalizeWord(this.category)}: ${this.productCount} Items`;
+    }
+    counter(productList){
+        Object.keys(productList).forEach(key => {
+            this.productCount += 1;
+        });
     }
     filter(productList){
         //filtering out by hardcoded id.  feels brute force but not seeing another way to filter?
@@ -55,5 +67,4 @@ export default class ProductList{
             }
         });
     }
-
 }

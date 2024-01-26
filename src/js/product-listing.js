@@ -1,7 +1,7 @@
 //js for the product-listing html page
 import ProductData from './ProductData.mjs';
 import ProductList from './ProductList.mjs';
-import { loadHeaderFooter, getParams } from './utils.mjs';
+import { loadHeaderFooter, getParams, capitalizeWord } from './utils.mjs';
 
 //wk3 remove and replace w/ generic category method
 //create ProductData object
@@ -16,12 +16,13 @@ const category = getParams('category');
 const dataSource = new ProductData();
 const listing = new ProductList(category, dataSource, '.product-list');
 listing.init();
-//add category name to Top Products on html page
+//add category name to Top Products on html page & breadcrumb
 const categoryElement = document.getElementById('category-name');
 //passing into inner html and capitalizing the first letter.  why js..why?
-categoryElement.innerHTML = `${category
-  .charAt(0)
-  .toUpperCase()}${category.slice(1)}`;
+//categoryElement.innerHTML = `${category
+//  .charAt(0)
+//  .toUpperCase()}${category.slice(1)}`;
+categoryElement.innerHTML = capitalizeWord(category);
 
 //load header/footer wk 3
 loadHeaderFooter();
