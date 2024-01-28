@@ -22,5 +22,3 @@ myList.init();
 //add category name to Top Products on html page & breadcrumb
 const categoryElement = document.getElementById('category-name');
 categoryElement.innerHTML = capitalizeWord(category);
-
-
