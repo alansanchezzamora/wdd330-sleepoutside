@@ -65,6 +65,10 @@ export async function loadHeaderFooter(){
   const footerTemplate = await loadTemplate('../partials/footer.html');
   renderWithTemplate(headerTemplate, header);
   renderWithTemplate(footerTemplate, footer);
+
+
+  renderCartCount(); //recall the renderCartCount to update backpack icon
+  
   //moved renderCartCount into here so it's loaded after the Header/Footer is created since that is an async function.
   renderCartCount()
 }
@@ -119,8 +123,9 @@ export function getCartCount() {
 
 //remove dashes and capitalize a word used for category in a couple places
 export function capitalizeWord(word) {
+  if (word !== null) {
   word = word.replace(/-/g, ' ');
   const words = word.split(' ');
   const capitalizedWords = words.map(w => w.charAt(0).toUpperCase() + w.slice(1));
-  return capitalizedWords.join(' ');
+  return capitalizedWords.join(' ');}
 }
