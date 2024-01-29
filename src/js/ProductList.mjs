@@ -4,7 +4,7 @@
     //class to handle productListing info.
     //filter out bad id's for tents.  May need a diff way to filter later?
 
-import { renderListWithTemplate, capitalizeWord } from "./utils.mjs";
+import { renderListWithTemplate, capitalizeWord} from "./utils.mjs";
 
 //Template literal for product cards on main page
 function productCardTemplate(product){
@@ -47,7 +47,7 @@ export default class ProductList{
         //passing into breadcrumb
         breadcrumbCountElement.innerHTML = `${capitalizeWord(this.category)}: ${this.productCount} Items`;
     }
-    //counts number of items in the list for the breadcrum. 
+    //counts number of items in the list for the breadcrumb. 
     counter(productList){
         Object.keys(productList).forEach(key => {
             this.productCount += 1;
@@ -63,5 +63,4 @@ export default class ProductList{
             }
         });
     }
-
 }

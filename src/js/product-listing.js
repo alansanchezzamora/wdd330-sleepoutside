@@ -8,9 +8,8 @@ import { loadHeaderFooter, getParams, capitalizeWord } from './utils.mjs';
 loadHeaderFooter();
 
 const category = getParams('category');
-//added to make product-listing have new code to force it to not use the cached version
-console.log(category);
 // first create an instance of our ProductData class.
+
 const dataSource = new ProductData();
 // then get the element we want the product list to render in
 const listElement = document.querySelector('.product-list');

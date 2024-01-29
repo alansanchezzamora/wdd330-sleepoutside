@@ -320,3 +320,30 @@ footer {
   transform: scale(1.08);
   transition: 0.25s;
 }
+
+.search input[type='text'] {
+  float: inline-start;
+  padding: 6px;
+  margin-top: 12px;
+  border: solid #8d8a8a;
+  border-radius: 10px;
+  font-size: 17px;
+  width: 160px;
+}
+
+.search [type='text']:focus {
+  border: 3px solid;
+}
+
+.search input[type='text']:focus::placeholder {
+  color: transparent;
+}
+
+#submit-btn {
+  float: inline-start;
+  padding: 6px;
+  margin-top: 12px;
+  margin-left: 8px;
+  border-radius: 10px;
+  font-size: 17px;
+}
