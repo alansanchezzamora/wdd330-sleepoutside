@@ -19,6 +19,53 @@
       <section class="products">
         <h2>Review & Place your Order</h2>
       </section>
+      <form id="checkout-form" method="get" action="">
+        <fieldset id="customer-info">
+          <legend class="legend">Customer Information</legend>
+          <!-- Name -->
+          <label for="fname" class="labels">First Name
+            <input type="text" id="fname" class="inputs required" name="fname" required>
+          </label>
+          <label for="lname" class="labels">Last Name
+              <input type="text" id="lname" class="inputs required" name="lname" required>
+          </label>
+          <!-- Address -->
+          <label for="street" class="labels">Street Address
+              <input type="text" id="street" class="inputs required" name="street" required>
+          </label>
+          <label for="city" class="labels">City
+              <input type="text" id="city" class="inputs required" name="city" required>
+          </label>
+          <label for="state" class="labels">State
+              <input type="text" id="state" class="inputs required" name="state" required>
+          </label>
+          <label for="zipcode" class="labels">Zip Code
+            <input type="text" id="zipcode" class="inputs required" name="zipcode" required pattern="\d{5}" title="Please enter a 5-digit ZIP code">
+          </label>
+        </fieldset>
+        <fieldset id="payment-info">
+          <!-- PAYEMENT  -->
+          <!-- Credit Card Number -->
+          <label for="creditCardNumber" class="labels">Credit Card Number
+            <input type="text" id="creditCardNumber" class="inputs required" name="creditCardNumber" required pattern="\d{16}" title="Please enter a 16-digit credit card number">
+          </label>
+          <!-- Expiration Date -->
+          <label for="expirationDate" class="labels">Expiration Date (MM/YY)
+            <input type="text" id="expirationDate" class="inputs required" name="expirationDate" required pattern="^(0[1-9]|1[0-2])\/\d{2}$" title="Please enter a valid expiration date in MM/YY format">
+          </label>
+          <!-- Security Code -->
+          <label for="securityCode" class="labels">Security Code (CVV)
+            <input type="text" id="securityCode" class="inputs required" name="securityCode" required pattern="\d{3}" title="Please enter a 3-digit security code">
+          </label>
+        </fieldset>
+        <section id="orderSummary">
+          <div id="checkout-subtotal" class="labels">Subtotal:  </div>
+          <div id="checkout-shipping" class="labels">Shipping: </div>
+          <div id="checkout-tax" class="labels">Tax:  </div>
+          <div id="checkout-total" class="labels">Final Total:  </div>
+          <button id="checkout-submit" type="submit">Complete Purchase</button>
+        </section>
+      </form>
     </main>
 
     <footer id="main-footer"></footer>
