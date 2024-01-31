@@ -7,7 +7,7 @@
 const baseURL = import.meta.env.VITE_SERVER_URL
 //added this to account for our server env missing a trailing /, so add it if it's missing
 //if it gets added later, it'll not impact the code.  
-const adjustedBaseURL = baseURL.endsWith('/') ? baseURL : baseURL + '/';
+//const adjustedBaseURL = baseURL.endsWith('/') ? baseURL : baseURL + '/';
 
 //Grabs the Product Info from json
 function convertToJson(res) {
@@ -18,19 +18,31 @@ function convertToJson(res) {
   }
 }
 
-export default class ProductData {
+export default class ExternalServices {
   async getData(category) {
 
-    const response = await fetch(adjustedBaseURL + `products/search/${category}`);
+    const response = await fetch(baseURL + `products/search/${category}`);
     //console.table(response);
     const data = await convertToJson(response);
     //console.log(data.Result)
     return data.Result;
   }  
   async findProductById(id) {
-    const products = await fetch(`${adjustedBaseURL}product/${id}`);
+    const products = await fetch(`${baseURL}product/${id}`);
     const data = await convertToJson(products);
     return data.Result;
+  }
+  async checkout(payload) {
+    const checkoutURL = "https://wdd330-backend.onrender.com:3000/";
+    //const checkoutURL = "http://server-nodejs.cit.byui.edu:3000/";
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    };
+    return await fetch(checkoutURL + "checkout/", options).then(convertToJson);
   }
 }
 
