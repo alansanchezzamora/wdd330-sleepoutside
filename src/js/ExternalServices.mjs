@@ -9,6 +9,8 @@ const baseURL = import.meta.env.VITE_SERVER_URL
 
 
 //added this to account for our server env missing a trailing /, so add it if it's missing
+//if it gets added later, it'll not impact the code.  
+const adjustedBaseURL = baseURL.endsWith('/') ? baseURL : baseURL + '/';
 
 //Grabs the Product Info from json
 async function convertToJson(res) {
@@ -23,12 +25,12 @@ async function convertToJson(res) {
 export default class ExternalServices {
   async getData(category) {
 
-    const response = await fetch(baseURL + `products/search/${category}`);
+    const response = await fetch(adjustedBaseURL + `products/search/${category}`);
     const data = await convertToJson(response);
     return data.Result;
   }  
   async findProductById(id) {
-    const products = await fetch(`${baseURL}product/${id}`);
+    const products = await fetch(`${adjustedBaseURL}product/${id}`);
     const data = await convertToJson(products);
     return data.Result;
   }
@@ -42,7 +44,7 @@ export default class ExternalServices {
       },
       body: JSON.stringify(payload),
     };
-    return await fetch(baseURL + "checkout/", options).then(convertToJson);
+    return await fetch(adjustedBaseURL + "checkout/", options).then(convertToJson);
   }
 }
 
