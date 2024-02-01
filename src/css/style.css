@@ -150,6 +150,9 @@ button {
         opacity: 0;
     }
 }
+button:active{
+    transform: scale(0.95);
+}
 /* Cart icon styles */
 .cart {
     padding-top: 1em;
