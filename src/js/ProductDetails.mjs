@@ -1,7 +1,7 @@
 //Feeds into product.js which feeds the product_pages/index.html
 //contain code to dynamically produce the product details
 //also contains the addToCart method
-import {setLocalStorage, renderCartCount, capitalizeWord} from './utils.mjs';
+import {setLocalStorage, renderCartCount, capitalizeWord, alertMessage, removeAllAlerts} from './utils.mjs';
 
 
 //template literal to populate the detail information for the given product
@@ -48,6 +48,12 @@ export default class ProductDetail {
             setLocalStorage('so-cart', this.product);
             //added here to update cart counter each time you add an item
             renderCartCount();
+            removeAllAlerts('add-to-cart-message');
+            alertMessage(`${this.product.NameWithoutBrand} Added To Cart`, true, 'add-to-cart-message')
+            console.log("closing")
+            setTimeout(() => {
+              removeAllAlerts('add-to-cart-message');
+            }, 5000);
     }
     //populates the details on the product page using the template
     //selector determines what element to attach the details to

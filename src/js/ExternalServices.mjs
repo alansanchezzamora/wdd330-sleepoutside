@@ -14,10 +14,14 @@ const adjustedBaseURL = baseURL.endsWith('/') ? baseURL : baseURL + '/';
 
 //Grabs the Product Info from json
 async function convertToJson(res) {
+  //convert reponse to json to collect all the info the server passes back
   const jsonRes = await res.json();
+  //console.log('json',JSON.stringify(jsonRes))
+  //if check if respone = ok
   if (res.ok) {
     return jsonRes;
   } else {
+    //if it's not ok, throw the error the server gives us
     throw {name: "servicesError", message: jsonRes};
   }
 }

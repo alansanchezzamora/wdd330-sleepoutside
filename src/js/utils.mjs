@@ -129,3 +129,31 @@ export function capitalizeWord(word) {
   const capitalizedWords = words.map(w => w.charAt(0).toUpperCase() + w.slice(1));
   return capitalizedWords.join(' ');}
 }
+
+//Checkout Error Messaging
+export function alertMessage(message, scroll=true, element){
+  const alert = document.createElement('div');
+  alert.classList.add('alert');
+  alert.innerHTML = `<p>${message}</p><span>X</span>`
+  //remove a message if its clicked on
+  alert.addEventListener("click", function (e) {
+    if (e.target.tagName == "SPAN") {
+      myElement.removeChild(this);
+    }
+  });
+  //add to the element doc
+  const myElement = document.getElementById(element);
+  myElement.prepend(alert);
+  //scroll to top
+  if(scroll){
+    window.scrollTo(0,0);
+  } 
+
+
+}
+
+export function removeAllAlerts(element){
+  const alerts = document.querySelectorAll('.alert');
+  console.log(alerts);
+  alerts.forEach((alert)=> document.getElementById(element).removeChild(alert));
+}
