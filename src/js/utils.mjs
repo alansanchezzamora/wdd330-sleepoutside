@@ -26,7 +26,11 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback);
 }
-
+/*
+░█▀▀░█▀▀░▀█▀░░█▀█░█▀█░█▀▄░█▀█░█▄█░█▀▀
+░█░█░█▀▀░░█░░░█▀▀░█▀█░█▀▄░█▀█░█░█░▀▀█
+░▀▀▀░▀▀▀░░▀░░░▀░░░▀░▀░▀░▀░▀░▀░▀░▀░▀▀▀
+*/
 //week2
 export function getParams(param){
   const queryString = window.location.search;
@@ -35,6 +39,11 @@ export function getParams(param){
   return product;
 }
 
+/* 
+░█▀▄░█▀▀░█▀█░█▀▄░█▀▀░█▀▄░░█░░░▀█▀░█▀▀░▀█▀░░░▀█▀░█▀▀░█▄█░█▀█░█░░░█▀█░▀█▀░█▀▀
+░█▀▄░█▀▀░█░█░█░█░█▀▀░█▀▄░░█░░░░█░░▀▀█░░█░░░░░█░░█▀▀░█░█░█▀▀░█░░░█▀█░░█░░█▀▀
+░▀░▀░▀▀▀░▀░▀░▀▀░░▀▀▀░▀░▀░░▀▀▀░▀▀▀░▀▀▀░░▀░░░░░▀░░▀▀▀░▀░▀░▀░░░▀▀▀░▀░▀░░▀░░▀▀▀
+*/
 //used by ProductList
 export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear=false){
   const htmlStrings = list.map(templateFn);
@@ -44,9 +53,11 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
 }
-
-
-//Week3
+/*
+░█▀▄░█▀▀░█▀█░█▀▄░█▀▀░█▀▄░░▀█▀░█▀▀░█▄█░█▀█░█░░░█▀█░▀█▀░█▀▀
+░█▀▄░█▀▀░█░█░█░█░█▀▀░█▀▄░░░█░░█▀▀░█░█░█▀▀░█░░░█▀█░░█░░█▀▀
+░▀░▀░▀▀▀░▀░▀░▀▀░░▀▀▀░▀░▀░░░▀░░▀▀▀░▀░▀░▀░░░▀▀▀░▀░▀░░▀░░▀▀▀
+*/
 export function renderWithTemplate(templateFn, parentElement, data, callback, position = "afterbegin"){
   //No idea what this is for...
   if(callback) {
@@ -56,6 +67,11 @@ export function renderWithTemplate(templateFn, parentElement, data, callback, po
   parentElement.insertAdjacentHTML(position, templateFn);
 }
 
+/* 
+░█░░░█▀█░█▀█░█▀▄░░█░█░█▀▀░█▀█░█▀▄░█▀▀░█▀▄░░░█░█▀▀░█▀█░█▀█░▀█▀░█▀▀░█▀▄
+░█░░░█░█░█▀█░█░█░░█▀█░█▀▀░█▀█░█░█░█▀▀░█▀▄░▄▀░░█▀▀░█░█░█░█░░█░░█▀▀░█▀▄
+░▀▀▀░▀▀▀░▀░▀░▀▀░░░▀░▀░▀▀▀░▀░▀░▀▀░░▀▀▀░▀░▀░▀░░░▀░░░▀▀▀░▀▀▀░░▀░░▀▀▀░▀░▀
+*/
 export async function loadHeaderFooter(){
   //grab header/footer elements
   const header = document.getElementById('main-header');
@@ -65,10 +81,7 @@ export async function loadHeaderFooter(){
   const footerTemplate = await loadTemplate('../partials/footer.html');
   renderWithTemplate(headerTemplate, header);
   renderWithTemplate(footerTemplate, footer);
-
-
   renderCartCount(); //recall the renderCartCount to update backpack icon
-  
   //moved renderCartCount into here so it's loaded after the Header/Footer is created since that is an async function.
   renderCartCount()
 }
@@ -81,12 +94,9 @@ export async function loadTemplate(path) {
 }
 
 /* 
-   _____          _____ _______    _____ ____  _    _ _   _ _______ ______ _____  
-  / ____|   /\   |  __ \__   __|  / ____/ __ \| |  | | \ | |__   __|  ____|  __ \ 
- | |       /  \  | |__) | | |    | |   | |  | | |  | |  \| |  | |  | |__  | |__) |
- | |      / /\ \ |  _  /  | |    | |   | |  | | |  | | . ` |  | |  |  __| |  _  / 
- | |____ / ____ \| | \ \  | |    | |___| |__| | |__| | |\  |  | |  | |____| | \ \ 
-  \_____/_/    \_\_|  \_\ |_|     \_____\____/ \____/|_| \_|  |_|  |______|_|  \_\
+░█▀▀░█▀█░█▀▄░▀█▀░░█▀▀░█▀█░█░█░█▀█░▀█▀░█▀▀░█▀▄
+░█░░░█▀█░█▀▄░░█░░░█░░░█░█░█░█░█░█░░█░░█▀▀░█▀▄
+░▀▀▀░▀░▀░▀░▀░░▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░░▀░░▀▀▀░▀░▀
 */
 //cart superscript
 export function renderCartCount(){
@@ -102,7 +112,13 @@ export function renderCartCount(){
   //populate the div w/ the count
   cartCounter.innerText = cartCount;
 }
-//Toggle visibility of the cart depending on if something is in it
+
+/* 
+░█░█░▀█▀░█▀▄░█▀▀░░█▀▀░█░░░█▀▀░█▄█░█▀▀░█▀█░▀█▀
+░█▀█░░█░░█░█░█▀▀░░█▀▀░█░░░█▀▀░█░█░█▀▀░█░█░░█░
+░▀░▀░▀▀▀░▀▀░░▀▀▀░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀░▀░░▀░
+*/
+//Toggle visibility of the cart counter depending on if something is in it
 //default is hidden
 export function showElement(element) {
   element.classList.add('visible');
@@ -121,6 +137,28 @@ export function getCartCount() {
   return cartCount;
 }
 
+/* 
+░█▀▀░█▀█░█▀▄░▀█▀░░█▀█░█▀█░▀█▀░█▄█░█▀█░▀█▀░▀█▀░█▀█░█▀█
+░█░░░█▀█░█▀▄░░█░░░█▀█░█░█░░█░░█░█░█▀█░░█░░░█░░█░█░█░█
+░▀▀▀░▀░▀░▀░▀░░▀░░░▀░▀░▀░▀░▀▀▀░▀░▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀
+*/
+
+export function startAnimateCartIcon() {
+  const cart = document.querySelector('.cart');
+  cart.classList.add('animate');
+}
+
+export function stopAnimateCartIcon() {
+  const cart = document.querySelector('.cart');
+  cart.classList.remove('animate');
+}
+
+
+/* 
+░█▀▀░█░░░█▀▀░█▀█░█▀█░░░░░░░█▀▀░█▀█░█▀█░▀█▀░▀█▀░█▀█░█░░░▀█▀░▀▀█░█▀▀
+░█░░░█░░░█▀▀░█▀█░█░█░░▄█▄░░█░░░█▀█░█▀▀░░█░░░█░░█▀█░█░░░░█░░▄▀░░█▀▀
+░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀░▀░░░▀░░░▀▀▀░▀░▀░▀░░░▀▀▀░░▀░░▀░▀░▀▀▀░▀▀▀░▀▀▀░▀▀▀
+*/
 //remove dashes and capitalize a word used for category in a couple places
 export function capitalizeWord(word) {
   if (word !== null) {
@@ -130,6 +168,12 @@ export function capitalizeWord(word) {
   return capitalizedWords.join(' ');}
 }
 
+
+/* 
+░█▀█░█▀█░█▀█░░░░░█░█░█▀█░░█▄█░█▀▀░█▀▀░█▀▀░█▀█░█▀▀░█▀▀
+░█▀▀░█░█░█▀▀░▄▄▄░█░█░█▀▀░░█░█░█▀▀░▀▀█░▀▀█░█▀█░█░█░█▀▀
+░▀░░░▀▀▀░▀░░░░░░░▀▀▀░▀░░░░▀░▀░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
+*/
 //Checkout Error Messaging
 export function alertMessage(message, scroll=true, element){
   const alert = document.createElement('div');
@@ -148,12 +192,26 @@ export function alertMessage(message, scroll=true, element){
   if(scroll){
     window.scrollTo(0,0);
   } 
-
-
 }
 
-export function removeAllAlerts(element){
+/* 
+░█▀▄░█▀▀░█▄█░█▀█░█░█░█▀▀░░█▄█░█▀▀░█▀▀░█▀▀░█▀█░█▀▀░█▀▀
+░█▀▄░█▀▀░█░█░█░█░▀▄▀░█▀▀░░█░█░█▀▀░▀▀█░▀▀█░█▀█░█░█░█▀▀
+░▀░▀░▀▀▀░▀░▀░▀▀▀░░▀░░▀▀▀░░▀░▀░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
+*/
+export function removeAllAlerts(element, fade=false){
+  //if fade=true, it'll apply the fade-out class which animates a fadeout, then it removes the element
+  //else, it just removes the element (cause it was clicked)
   const alerts = document.querySelectorAll('.alert');
-  console.log(alerts);
-  alerts.forEach((alert)=> document.getElementById(element).removeChild(alert));
+  if (fade!=false){
+    alerts.forEach((alert) => {
+      alert.classList.add('fade-out');
+      alert.addEventListener('animationend', () => {
+        alerts.forEach((alert)=> document.getElementById(element).removeChild(alert));
+      });
+    });
+  }
+  else{
+    alerts.forEach((alert)=> document.getElementById(element).removeChild(alert));
+  }
 }

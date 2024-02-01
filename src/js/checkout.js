@@ -9,9 +9,7 @@ const checkout = new CheckoutProcess('so-cart');
 checkout.init();
 //checkout.calculateSubTotal();
 
-document.forms['checkout']
-.addEventListener('submit', (e) => {
-e.preventDefault();
-checkout.checkout();
+document.forms['checkout'].addEventListener('submit', (e) => {
+    e.preventDefault();
+    checkout.checkout();
 });
-

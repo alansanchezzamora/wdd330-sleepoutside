@@ -126,8 +126,30 @@ button {
 }
 /* End utility classes */
 
-
-
+/*Animations for cart and messages*/
+.animate {
+    animation: addToCart 0.25s ease-out;
+}
+@keyframes addToCart {
+    0% {
+    }
+    50% {
+        transform: scale(1.1) rotate(5deg) translateY(5px);
+    }
+    100% {
+    }
+}
+.fade-out {
+    animation: fadeout 0.25s linear;
+}
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
 /* Cart icon styles */
 .cart {
     padding-top: 1em;
@@ -274,25 +296,31 @@ button {
 }
 
 /* Alert Message Style */
-#checkout-messages, #add-to-cart-message{
+#checkout-messages,
+#add-to-cart-message {
     margin-top: 20px;
 }
-.alert{
+#add-to-cart-message {
+    position: absolute;
+    transform: translateY(-1px);
+    width: 100%;
+}
+.alert {
     background-color: var(--primary-color);
     width: 100%;
     border: 1px solid darkorange;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
 }
-.alert p{
+.alert p {
     margin: 1rem 30px 1rem 0;
 }
-.alert span:hover{
+.alert span:hover {
     transform: scale(1.3);
-    transition: .25s;
+    transition: 0.25s;
     /*background-color: grey;*/
 }
 
