@@ -17,6 +17,7 @@
     box-sizing: border-box;
 }
 body {
+    position: relative;
     margin: 0;
     font-family: var(--font-body);
     font-size: var(--font-base);
