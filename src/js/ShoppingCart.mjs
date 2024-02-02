@@ -15,8 +15,11 @@ export default class ShoppingCart {
   //RENDER CART CONTENTS
   renderCartContents() {
     const cartItems = getLocalStorage(this.key);
-    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-    document.querySelector(this.parentSelector).innerHTML = htmlItems.join('');
+    //added this check so js doesn't error out if cart is empty
+    if (cartItems != null && cartItems.length>0){
+      const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+      document.querySelector(this.parentSelector).innerHTML = htmlItems.join('');
+    }
   }
   //DELETE CART ITEMS
   removeItem(id) {
@@ -41,15 +44,17 @@ export default class ShoppingCart {
     var cartCount = getCartCount();
     const element = document.getElementById('cart-footer');
     const totalElement = document.getElementById('cart-total');
-    let finalPrice = 0;
+    let subTotal = 0;
     if (cartCount > 0) {
       showElement(element);
       const cartItems = getLocalStorage(this.key);
       for (let i = 0; i < cartItems.length; i++) {
         let obj = cartItems[i];
-        finalPrice = obj.FinalPrice + finalPrice;
+        subTotal = obj.FinalPrice + subTotal;
       }
-      totalElement.innerText = `Total : $${finalPrice}`;
+      // Rounding to the nearest hundredth decimal place
+      subTotal = subTotal.toFixed(2);
+      totalElement.innerText = `Total : $${subTotal}`;
     } else {
       hideElement(element);
     }
