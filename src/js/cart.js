@@ -1,10 +1,6 @@
 //used to populate cart/index.html data
 
-import {
-    getLocalStorage,
-    loadHeaderFooter,
-    renderCartCount,
-} from './utils.mjs';
+import { getLocalStorage, loadHeaderFooter, renderCartCount, setLocalStorage } from './utils.mjs';
 import ShoppingCart from './ShoppingCart.mjs';
 
 loadHeaderFooter(); //load the header/footer templates
@@ -27,15 +23,16 @@ updateItemTotals.forEach((input) => {
     //create an event listener for each
     input.addEventListener('change', function (ev) {
         let newKey = input.parentElement.getAttribute('Id');
-        let newValue = ev.target.value;
+        let newValue = ev.target.value
         // Get the existing data
         let existing = getLocalStorage('so-cart');
 
         //Add quantity to existing ID in item-count array
         for (let i = 0; i < existing.length; i++) {
             let obj = existing[i];
-            if (newKey === obj.Id) {
-                obj.Q = newValue;
+            if (newKey === obj.Id){
+            obj.Q = newValue;
+    
             }
         }
         // Save back to localStorage
