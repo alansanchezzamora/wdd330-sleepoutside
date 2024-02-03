@@ -4,7 +4,7 @@
 //create a ProductDetails class based on the id and data class.
 //initialize productDetails which builds the product page details
 
-import ProductData from './ProductData.mjs';
+import ExternalServices from './ExternalServices.mjs';
 import ProductDetails from './ProductDetails.mjs';
 import { loadHeaderFooter, getParams } from './utils.mjs';
 
@@ -12,6 +12,6 @@ import { loadHeaderFooter, getParams } from './utils.mjs';
 loadHeaderFooter();
 
 const productId = getParams('product');
-const dataSource = new ProductData();
+const dataSource = new ExternalServices();
 const product = new ProductDetails(productId, dataSource);
 product.init();

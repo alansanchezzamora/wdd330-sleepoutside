@@ -1,7 +1,7 @@
 //Feeds into product.js which feeds the product_pages/index.html
 //contain code to dynamically produce the product details
 //also contains the addToCart method
-import {setLocalStorage, renderCartCount, capitalizeWord} from './utils.mjs';
+import {setLocalStorage, renderCartCount, capitalizeWord, alertMessage, removeAllAlerts, startAnimateCartIcon, stopAnimateCartIcon, getLocalStorage} from './utils.mjs';
 
 
 //template literal to populate the detail information for the given product
@@ -45,10 +45,32 @@ export default class ProductDetail {
     }
     //simply adds the product info to the local storage.
     addToCart(){
-            setLocalStorage('so-cart', this.product);
+        let cart = getLocalStorage('so-cart');
+
+          if (cart){
+
+              if(cart.some(cart=> cart.Id === this.product.Id )){
+                cart.forEach(element => {
+                if (this.product.Id === element.Id){
+                  element.Q++
+                };
+                localStorage.setItem('so-cart', JSON.stringify(cart));
+                });
+              }else{
+                   this.addItem(this.product);
+                 };
+
+            } else {
+              this.addItem(this.product);
+             };
             //added here to update cart counter each time you add an item
             renderCartCount();
-    }
+            removeAllAlerts('add-to-cart-message');
+            alertMessage(`${this.product.NameWithoutBrand} Added To Cart`, true, 'add-to-cart-message')
+            setTimeout(() => {removeAllAlerts('add-to-cart-message', true)}, 2500);
+            startAnimateCartIcon();
+            setTimeout(() => {stopAnimateCartIcon()}, 500);
+    };
     //populates the details on the product page using the template
     //selector determines what element to attach the details to
     renderProductDetails(selector){
@@ -63,5 +85,9 @@ export default class ProductDetail {
       const breadcrumbElement = document.getElementById('breadcrumb-category');
       breadcrumbElement.innerHTML = `${capitalizeWord(category)}`;
       breadcrumbElement.setAttribute('href',`../product-listing/index.html?category=${category}`);
-    }      
+    } 
+    addItem(product){
+      this.product["Q"] = 1;
+      setLocalStorage('so-cart', this.product); 
+    }
 }

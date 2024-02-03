@@ -15,8 +15,10 @@ export default class ShoppingCart {
   //RENDER CART CONTENTS
   renderCartContents() {
     const cartItems = getLocalStorage(this.key);
-    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-    document.querySelector(this.parentSelector).innerHTML = htmlItems.join('');
+    if (cartItems != null && cartItems.length>0){
+      const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+      document.querySelector(this.parentSelector).innerHTML = htmlItems.join('');
+       };
   }
   //DELETE CART ITEMS
   removeItem(id) {
@@ -27,7 +29,7 @@ export default class ShoppingCart {
       if (itemIndex !== -1) {
         // if you find the item, delete it from the array
         cartItems.splice(itemIndex, 1);
-        localStorage.clear(); //delete the previous so-cart in localStorage
+        //localStorage.clear(cartItems); //delete the previous so-cart in localStorage
         localStorage.setItem('so-cart', JSON.stringify(cartItems)); //save the new object cart in localStorage and make it json object.
       }
     }
@@ -41,22 +43,24 @@ export default class ShoppingCart {
     var cartCount = getCartCount();
     const element = document.getElementById('cart-footer');
     const totalElement = document.getElementById('cart-total');
-    let finalPrice = 0;
+    let subTotal = 0;
+    let mult = 0;
     if (cartCount > 0) {
       showElement(element);
       const cartItems = getLocalStorage(this.key);
       for (let i = 0; i < cartItems.length; i++) {
         let obj = cartItems[i];
-        finalPrice = obj.FinalPrice + finalPrice;
-      }
-      totalElement.innerText = `Total : $${finalPrice}`;
+          mult = obj.Q
+          subTotal = mult * obj.FinalPrice + subTotal;
+        };
+      // Rounding to the nearest hundredth decimal place
+      subTotal = subTotal.toFixed(2);
+      totalElement.innerText = `Total : $${subTotal}`;
     } else {
       hideElement(element);
     }
-    var cartItems = getLocalStorage('so-cart');
   }
 }
-
 
 
 //CART ITEM TEMPLATE LITERAL
@@ -73,7 +77,7 @@ function cartItemTemplate(item) {
     <h2 class='card__name'>${item.Name}</h2>
   </a>
   <p class='cart-card__color'>${item.Colors[0].ColorName}</p>
-  <p class='cart-card__quantity'>qty: 1</p>
+  <input id="qty-textbox" min="1" name="quantity" class='cart-card__quantity' type="number" value="${item.Q}">
   <p class='cart-card__price'>$${item.FinalPrice}</p>
 </li>`;
 
