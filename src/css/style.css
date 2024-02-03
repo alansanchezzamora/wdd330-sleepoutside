@@ -292,6 +292,11 @@ button:active {
 .cart-card__quantity {
     grid-row: 1;
     grid-column: 3;
+    width: 50px;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 5px;
+    border: solid;
 }
 
 .cart-card__price {
