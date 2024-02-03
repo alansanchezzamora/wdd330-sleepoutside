@@ -133,6 +133,8 @@ export function getCartCount() {
   let cartCount = 0;
   if (cart !== null && cart !== undefined) {
     cartCount = cart.length;
+
+    
   }
   return cartCount;
 }
